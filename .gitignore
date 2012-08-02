@@ -9,6 +9,8 @@ eggs
 parts
 bin
 var
+include
+lib
 sdist
 develop-eggs
 .installed.cfg
@@ -25,3 +27,7 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+
+.DS_Store
+*~
+*.pyc

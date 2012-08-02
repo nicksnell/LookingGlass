@@ -1,0 +1,13 @@
+project: Example Project
+work:
+    - from: 2012-07-24 14:30:00
+      to:   2012-07-24 16:30:00
+      desc: An example Entry
+
+    - from: 2012-07-29 11:30:00
+      to:   2012-07-29 12:30:00
+      desc: An example Entry
+
+    - from: 2012-07-31 09:30:00
+      to:   2012-07-31 13:00:00
+      desc: An example Entry
