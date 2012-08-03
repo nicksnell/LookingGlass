@@ -1,4 +1,4 @@
-"""Looking Glass - Timesheet analyzer"""
+"""Looking Glass - Timesheet analyzer & builder"""
 
 import os.path
 import datetime
@@ -11,18 +11,25 @@ __version__ = '0.1'
 class TimesheetException(Exception): pass
 
 class TimesheetManager(object):
-	pass
-	
-class Timesheet(object):
 	
 	def __init__(self, f):
 		"""Read a timesheet file"""
 		
 		if not os.path.exists(f):
-			raise TimesheetException('Can not read Timesheet!')
+			raise TimesheetException('Timesheet does not exist!')
 		
+		try:
+			conent = open(f).read()
+		except IOError:
+			raise TimesheetException('Timesheet could not be read!')
+			
 		# Parse the document
-		self.yaml = yaml.load(open(f).read())
+		self.yaml = yaml.load(conent)
+		self._filename = f
+		
+	def save(self):
+		# TODO: Save timesheet.
+		pass
 	
 	def get_project_name(self):
 		return self.yaml['project']
@@ -52,6 +59,17 @@ class Timesheet(object):
 				hours += self.difference_in_hours(seconds)
 			
 		return hours
+	
+	def add_hours(self, from_date, to_date, desc=''):
+		"""Add hours to the timesheet"""
+		
+		work = {
+			'from': from_date,
+			'to': to_date, 
+			'desc': desc
+		}
+		
+		self.yaml['work'].append(work)
 	
 	@staticmethod
 	def difference_in_hours(seconds):
